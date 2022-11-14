@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show book</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="header_background">
+    <h1 class="header_text">Book</h1>
+</div>
+<ul class="navbar">
+    <li><a href="/people">People</a>
+    <li><a href="/books">Books</a>
+</ul>
+<p style="font-size:15pt" th:text="${book.getName()}">VALUE</p>
+<p style="font-size:15pt" th:text="${book.getAuthor() + ', ' + book.getYear()}">VALUE</p>
+<p style="font-size:15pt" th:text="${book.getId()}">VALUE</p>
+
+<!--<a style="font-size:15pt" th:href="@{/books/{id}/edit(id=${book.getId()})}">Edit book</a>-->
+<form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+<br/>
+
+<h1 class="header_text">Owner</h1>
+<div th:if="${people}">
+    <p>Book is free</p>
+    <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+        <label for="person">Assign to:</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}">
+            </option>
+        </select>
+        <input type="submit" value="Assign"/>
+    </form>
+</div>
+<div th:if="${owner}">
+    <table>
+        <tr>
+            <td>
+                <a th:href="@{/people/{id}(id=${owner.getId()})}" th:text="${owner.getName()}"></a>
+            </td>
+            <td>
+                <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}" >
+                    <input type="submit" value="Free book"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

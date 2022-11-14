@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Show</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="header_background">
+  <h1 class="header_text">Person</h1>
+</div>
+<ul class="navbar">
+  <li><a href="/people">People</a>
+  <li><a href="/books">Books</a>
+</ul>
+<div class="main">
+  <p style="font-size:15pt" th:text="${person.getName() + ', ' + person.getYear()}">VALUE</p>
+  <p style="font-size:15pt" th:text="${person.getId()}">VALUE</p>
+
+  <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Редактировать"/>
+  </form>
+  <br/>
+  <br/>
+  <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+  </form>
+  <br/>
+  <hr/>
+  <br/>
+  <h2 class="header_text">Books</h2>
+  <div th:if="${books.isEmpty()}">
+    <p>Person has no books</p>
+  </div>
+  <div th:each="book : ${books}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}"
+       th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
+  </div>
+</div>
+</body>
+</html>
