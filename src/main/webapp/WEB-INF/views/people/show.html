@@ -17,7 +17,7 @@
   <li><a href="/books">Books</a>
 </ul>
 <div class="main">
-  <p style="font-size:15pt" th:text="${person.getName() + ', ' + person.getYear()}">VALUE</p>
+  <p style="font-size:15pt" th:text="${person.getName() + ', ' + person.getYearOfBirth()}">VALUE</p>
   <p style="font-size:15pt" th:text="${person.getId()}">VALUE</p>
 
   <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
@@ -36,7 +36,7 @@
     <p>Person has no books</p>
   </div>
   <div th:each="book : ${books}">
-    <a th:href="@{/books/{id}(id=${book.getId()})}"
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:style="${book.isExpired()} ? 'color: red' : ''"
        th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
   </div>
 </div>

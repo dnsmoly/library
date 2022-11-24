@@ -1,13 +1,20 @@
 body{
-    background-color: #FFF9E4;
+    background-color: #FFEBCD;
     padding-left: 11em;
+    margin: 0;
 }
+
+a {
+    color: inherit;
+}
+
 .header_background{
     width: 100%;
     height: 8%;
-    background-color: #FFEBCD;
+    background-color: #DFB2F4;
     margin-bottom: 10px;
 }
+
 ul.navbar {
     list-style-type: none;
     padding: 0;
@@ -20,8 +27,32 @@ ul.navbar {
     font-family: 'Raleway', sans-serif;
 }
 .header_text {
-    color: #353073;
+    color: #14110F;
     font-family: 'Raleway', sans-serif;
     vertical-align: baseline;
     margin-left: 30px;
+}
+
+.pages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #7E7F83;
+}
+
+.page-list-element {
+    float: left;
+}
+
+.page-element {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.page-element:hover {
+    background-color: #a4a5a8;
 }
