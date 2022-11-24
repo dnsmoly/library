@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Search book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="header_background">
+  <h1 class="header_text">Search</h1>
+</div>
+<ul class="navbar">
+  <li><a href="/people">People</a>
+  <li><a href="/books">Books</a>
+</ul>
+<form th:action="@{/books/search}">
+  <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
+         placeholder="Search...">
+  <button type="submit" >Search</button>
+  <br/>
+</form>
+<br/>
+<div th:id="${books}">
+<div th:if="${books.size() < 1}">
+  <span>No books found</span>
+</div>
+<div th:unless="${books.size() < 1}">
+  <div th:each="book : ${books}">
+    <div th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></div>
+    <br/>
+    <div th:if="${book.getOwner() == null}" th:text="${'This book is free'}"></div>
+    <div th:if="${book.getOwner() != null}" th:text="${'This book is owned by ' + book.getOwner().getName()}"></div>
+    <hr/>
+  </div>
+</div>
+</div>
+</body>
+</html>

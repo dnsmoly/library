@@ -16,14 +16,29 @@
     <li><a href="/people">People</a>
     <li><a href="/books">Books</a>
 </ul>
+<div>
+    <ul>
+        <li><a th:href="@{/books(sort_by_year=true)}">sort by year</a></li>
+        <li><a th:href="@{/books(page=1, books_per_page=3)}">paginate</a></li>
+        <li><a th:href="@{/books(page=1, books_per_page=3, sort_by_year=true)}">paginate and sort by year</a></li>
+    </ul>
+</div>
 <div th:each="book : ${books}">
   <a th:href="@{/books/{id}(id=${book.getId()})}"
      th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
 </div>
 
 <br/>
+<ul th:if="${paginate}" class="pages">
+    <li class="page-element page-list-element" th:each="page : ${#numbers.sequence(1,totalPages)}">
+        <a class="page-element" th:href="@{'/books?' + 'page=' + ${page} + '&books_per_page=3'}" th:text="${page}"></a>
+    </li>
+</ul>
 <hr/>
 
-<a href="/books/new">Add new book</a>
+<div class="actions">
+    <a href="/books/new">Add new book</a>
+    <a href="/books/search">Search</a>
+</div>
 </body>
 </html>
