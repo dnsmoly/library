@@ -1,5 +1,5 @@
 # Library managing web app
-This is a small library managing Spring MVC app. It is able to do basic CRUD operations on users and books and some more operations. 
+This is a library managing Spring MVC app. It is able to do basic CRUD operations on users and books and some more operations. 
 
 In version 2.0 some functionality besides CRUD operations was added including:
 * Pagination and sorting for books
